@@ -1,17 +1,33 @@
 <script>
-  //alert(document.cookie + " || " + history.length + " || " + localStorage.getItem('bdindicatorrrr'));
-  if(localStorage.getItem('bindicator') == 'true'){
-    alert('1| ' + document.cookie);
-    localStorage.setItem('bindicator', 'false');
-  } else {
-    alert('2| ' + document.cookie);
-    localStorage.setItem('bindicator', 'true');
-	  location.assign("https://www.example.com");
-	//VK.Retargeting.Event("add-to-cart");
-    //window.location.assign("example.com");
-  }
-  
-  
+const isValidUrl = (url) => { try { new URL(url); } catch (e) { console.error(e); return false; } return true; };
+				
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const myMap = new Map();
+
+var maxs = 0;
+var b = true;
+
+for (var i = 0; b; i++) {
+	var s = parseInt(urlParams.get("s"+i));
+	var u = urlParams.get("u"+i);
+	if(s === null || u === null || ! isValidUrl(u)) b=false;
+	else {
+		myMap.set( new URL(u), s);
+		maxs += s;
+	}
+}
+
+var rand = Math.floor(Math.random() * maxs)+1;
+var locals=0;
+
+for (var [key, value] of myMap) {
+	locals +=value;
+	if(locals>=rand){
+		window.location.assign(key); 
+		break;
+	}
+}
 </script>
 
 <script type="text/javascript">!function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://vk.com/js/api/openapi.js?168",t.onload=function(){VK.Retargeting.Init("VK-RTRG-875262-dOqLM"),VK.Retargeting.Hit()},document.head.appendChild(t)}();</script><noscript><img src="https://vk.com/rtrg?p=VK-RTRG-875262-dOqLM" style="position:fixed; left:-999px;" alt=""/></noscript>
