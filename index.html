@@ -24,7 +24,9 @@ var locals=0;
 for (var [key, value] of myMap) {
 	locals +=value;
 	if(locals>=rand){
-		window.location.assign(key); 
+		const uri = 'https://afflt.github.io/getref/index.html';
+		const encoded = encodeURIComponent(uri);
+		window.location.assign("https://vk.com/away.php?to=" + encodeURIComponent(key)); 
 		break;
 	}
 }
